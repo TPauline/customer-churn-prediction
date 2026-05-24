@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Churn Prediction</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a5f, #2563eb);
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #bfdbfe;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .btn-launch {
+      display: inline-block;
+      background: #ffffff;
+      color: #1e3a5f;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e3a5f;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: #f1f5f9; }
+    .card p  { font-size: 0.92rem; color: #94a3b8; line-height: 1.6; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .metric {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .metric-label {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-top: 6px;
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 60px;
+    }
+
+    .stack-pill {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .cta {
+      text-align: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 48px 24px;
+    }
+
+    .cta h2 { font-size: 1.8rem; margin-bottom: 12px; }
+    .cta p  { color: #94a3b8; margin-bottom: 28px; }
+
+    .btn-cta {
+      display: inline-block;
+      background: #2563eb;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-cta:hover { background: #1d4ed8; }
+    .btn-cta.outline {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #cbd5e1;
+    }
+    .btn-cta.outline:hover { background: #1e293b; }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #475569;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Customer Churn Prediction</h1>
+  <p>A full-stack machine learning project that predicts which telecom customers are likely to cancel — before they do.</p>
+  <div class="badge-row">
+    <span class="badge">Python</span>
+    <span class="badge">scikit-learn</span>
+    <span class="badge">pandas</span>
+    <span class="badge">SMOTE</span>
+    <span class="badge">Streamlit</span>
+    <span class="badge">Logistic Regression</span>
+  </div>
+  <!-- REPLACE THIS HREF WITH YOUR STREAMLIT APP URL -->
+  <a class="btn-launch" href="https://YOUR-APP.streamlit.app" target="_blank">
+    Launch Live Dashboard →
+  </a>
+</header>
+
+<main>
+
+  <!-- WHAT IT DOES -->
+  <h2 class="section-title">What It Does</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Dataset Overview</h3>
+      <p>Scores all 7,000+ customers by churn risk and surfaces the highest-risk accounts in a sortable table.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <h3>Single Customer Prediction</h3>
+      <p>Enter any customer's details and instantly get a churn probability score with a visual risk gauge.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎚️</div>
+      <h3>Adjustable Risk Threshold</h3>
+      <p>A sidebar slider lets the business team set how aggressive retention campaigns should be.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>Risk Distribution Charts</h3>
+      <p>Visualises churn risk scores across the full customer base and historical churn rates by contract type.</p>
+    </div>
+  </div>
+
+  <!-- MODEL METRICS -->
+  <h2 class="section-title">Model Performance</h2>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-value">~0.84</div>
+      <div class="metric-label">ROC-AUC Score</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">~79%</div>
+      <div class="metric-label">Recall (Churn)</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">7,032</div>
+      <div class="metric-label">Training Customers</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">21</div>
+      <div class="metric-label">Input Features</div>
+    </div>
+  </div>
+
+  <!-- TECH STACK -->
+  <h2 class="section-title">Tech Stack</h2>
+  <div class="stack-list">
+    <span class="stack-pill">Python 3</span>
+    <span class="stack-pill">pandas — data manipulation</span>
+    <span class="stack-pill">scikit-learn — ML model + evaluation</span>
+    <span class="stack-pill">imbalanced-learn — SMOTE oversampling</span>
+    <span class="stack-pill">matplotlib + seaborn — visualisation</span>
+    <span class="stack-pill">Streamlit — web dashboard</span>
+    <span class="stack-pill">joblib — model serialisation</span>
+    <span class="stack-pill">Jupyter Notebooks — development</span>
+    <span class="stack-pill">GitHub Pages — portfolio hosting</span>
+    <span class="stack-pill">Streamlit Cloud — app deployment</span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Explore the Project</h2>
+    <p>View the live dashboard or browse the source code on GitHub.</p>
+    <!-- REPLACE BOTH HREFS BELOW -->
+    <a class="btn-cta" href="https://YOUR-APP.streamlit.app" target="_blank">
+      Open Live Dashboard
+    </a>
+    <a class="btn-cta outline" href="https://github.com/YOUR-USERNAME/customer-churn-prediction" target="_blank">
+      View on GitHub
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  Built with Python · scikit-learn · Streamlit &nbsp;|&nbsp;
+  Data: Telco Customer Churn — Kaggle
+</footer>
+
+</body>
+</html>
