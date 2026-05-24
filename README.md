@@ -1,0 +1,1 @@
+[![Dashboard Preview](outputs/dashboard_preview.png)](https://tpauline.github.io/customer-churn-prediction/)
